@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-layout',
@@ -6,9 +7,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./layout.component.css'],
 })
 export class LayoutComponent implements OnInit {
-  constructor() {}
+  constructor(private _route : Router) {}
 
   ngOnInit(): void {}
 
-  handleSignOut() {}
+  route(link : string) {
+    console.log(link);
+    this._route.navigateByUrl(link);
+  }
 }
