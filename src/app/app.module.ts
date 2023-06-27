@@ -6,10 +6,11 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './auth/components/login/login.component';
 import { RegisterComponent } from './auth/components/register/register.component';
 import { ToastModule } from 'primeng/toast';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [AppComponent, LoginComponent, RegisterComponent],
-  imports: [BrowserModule, AppRoutingModule, ToastModule],
+  imports: [BrowserModule, AppRoutingModule, ToastModule, SharedModule],
   providers: [],
   bootstrap: [AppComponent],
 })

@@ -12,7 +12,6 @@ export class LayoutComponent implements OnInit {
   ngOnInit(): void {}
 
   route(link : string) {
-    console.log(link);
     this._route.navigateByUrl(link);
   }
 }
