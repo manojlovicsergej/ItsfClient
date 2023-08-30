@@ -5,7 +5,7 @@
       style="min-height: 80px"
     >
       <div class="bg-black flex">
-        <ul
+        <ul 
           class="list-none p-0 m-0 flex lg:align-items-center select-none flex-column lg:flex-row border-top-1 lg:border-top-none"
         >
           <li>
@@ -13,17 +13,17 @@
               (click)="route('/dashboard')"
               class="flex px-6 p-3 lg:px-3 lg:py-2 align-items-center text-gray-400 hover:text-white hover:bg-gray-800 font-medium border-round cursor-pointer transition-colors transition-duration-100"
             >
-            <i class="fa-solid fa-house pr-2"></i>
+              <i class="fa-solid fa-house pr-2"></i>
               <span class="font-medium">Početna</span>
             </a>
           </li>
           <li>
             <a
-              (click)="route('/racuni')"
+              (click)="route('/igraci')"
               class="flex px-6 p-3 lg:px-3 lg:py-2 align-items-center text-gray-400 hover:text-white hover:bg-gray-800 font-medium border-round cursor-pointer transition-colors transition-duration-100"
             >
-            <i class="fa-sharp fa-solid fa-file-invoice-dollar pr-2"></i>
-              <span class="font-medium">Računi</span>
+              <i class="fa-sharp fa-solid fa-users pr-2"></i>
+              <span class="font-medium">Igrači</span>
             </a>
           </li>
           <li>
@@ -31,8 +31,8 @@
               (click)="route('/maloprodaja')"
               class="flex px-6 p-3 lg:px-3 lg:py-2 align-items-center text-gray-400 hover:text-white hover:bg-gray-800 font-medium border-round cursor-pointer transition-colors transition-duration-100"
             >
-            <i class="fa-solid fa-cash-register pr-2"></i>
-              <span class="font-medium">Maloprodaja</span>
+              <i class="fa-solid fa-futbol pr-2"></i>
+              <span class="font-medium">Utakmice</span>
             </a>
           </li>
           <li>
@@ -40,8 +40,8 @@
               (click)="route('/roba')"
               class="flex px-6 p-3 lg:px-3 lg:py-2 align-items-center text-gray-400 hover:text-white hover:bg-gray-800 font-medium border-round cursor-pointer transition-colors transition-duration-100"
             >
-            <i class="fa-solid fa-boxes-stacked pr-2"></i>
-              <span class="font-medium">Roba</span>
+              <i class="fa-solid fa-boxes-stacked pr-2"></i>
+              <span class="font-medium">Turniri</span>
             </a>
           </li>
           <li>
@@ -49,26 +49,8 @@
               (click)="route('/kompanija')"
               class="flex px-6 p-3 lg:px-3 lg:py-2 align-items-center text-gray-400 hover:text-white hover:bg-gray-800 font-medium border-round cursor-pointer transition-colors transition-duration-100"
             >
-            <i class="fa-solid fa-building pr-2"></i>
-              <span class="font-medium">Kompanija</span>
-            </a>
-          </li>
-          <li>
-            <a
-              (click)="route('/banka')"
-              class="flex px-6 p-3 lg:px-3 lg:py-2 align-items-center text-gray-400 hover:text-white hover:bg-gray-800 font-medium border-round cursor-pointer transition-colors transition-duration-100"
-            >
-            <i class="fa-solid fa-building-columns pr-2"></i>
-              <span class="font-medium">Banka</span>
-            </a>
-          </li>
-          <li>
-            <a
-              (click)="route('/podesavanja')"
-              class="flex px-6 p-3 lg:px-3 lg:py-2 align-items-center text-gray-400 hover:text-white hover:bg-gray-800 font-medium border-round cursor-pointer transition-colors transition-duration-100"
-            >
-            <i class="fa-sharp fa-solid fa-gear pr-2"></i>
-              <span class="font-medium">Podešavanja</span>
+              <i class="fa-solid fa-building pr-2"></i>
+              <span class="font-medium">Liga</span>
             </a>
           </li>
         </ul>

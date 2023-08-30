@@ -2,13 +2,10 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardModule } from './modules/dashboard/dashboard.module';
 import { PublicComponent } from './public.component';
-import { RacuniModule } from './modules/racuni/racuni.module';
+import { IgraciModule } from './modules/igraci/igraci.module';
 import { RobaModule } from './modules/roba/roba.module';
 import { MaloprodajaModule } from './modules/maloprodaja/maloprodaja.module';
 import { KompanijaModule } from './modules/kompanija/kompanija.module';
-import { BankaModule } from './modules/banka/banka.module';
-import { PodesavanjaModule } from './modules/podesavanja/podesavanja.module';
-import { PublicModule } from './public.module';
 
 const routes: Routes = [
   {
@@ -26,11 +23,11 @@ const routes: Routes = [
         },
       },
       {
-        path: 'racuni',
-        loadChildren: () => RacuniModule,
+        path: 'igraci',
+        loadChildren: () => IgraciModule,
         data: {
           breadcrumb: {
-            label: 'Računi',
+            label: 'Igrači',
             disable: true,
           },
         },
@@ -61,26 +58,6 @@ const routes: Routes = [
         data: {
           breadcrumb: {
             label: 'Kompanija',
-            disable: true,
-          },
-        },
-      },
-      {
-        path: 'banka',
-        loadChildren: () => BankaModule,
-        data: {
-          breadcrumb: {
-            label: 'Banka',
-            disable: true,
-          },
-        },
-      },
-      {
-        path: 'podesavanja',
-        loadChildren: () => PodesavanjaModule,
-        data: {
-          breadcrumb: {
-            label: 'Podešavanja',
             disable: true,
           },
         },
