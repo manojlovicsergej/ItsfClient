@@ -16,7 +16,10 @@ export class IgraciTableComponent implements OnInit{
   dodajIgracaDialog(){
     const ref = this._dialogService.open(DodajIgracaDijalogComponent, {
       showHeader: false,
-      width: '500px',
+      width: '600px',
+      data : {
+        title : 'Dodavanje novog igrača'
+      }
     });
   }
 }

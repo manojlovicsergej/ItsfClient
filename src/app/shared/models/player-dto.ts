@@ -1,4 +1,4 @@
-export interface PlayerTableDto {
+export interface PlayerDto {
   id?: number | undefined;
   firstName?: string | undefined;
   lastName?: string | undefined;

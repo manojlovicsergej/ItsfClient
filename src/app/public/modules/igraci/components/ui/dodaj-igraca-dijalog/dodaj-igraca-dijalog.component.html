@@ -1,1 +1,62 @@
-<p>dodaj-igraca-dijalog works!</p>
+<app-centered-dialog
+  [dialogTitle]="dialogTitle"
+  (onCancel)="handleCancel()"
+  (onSave)="handleSave()"
+>
+  <div [formGroup]="form" *ngIf="form">
+    <div class="w-full">
+      <app-field
+        fieldLabel="First name"
+      >
+        <input
+          class="inputfield w-full"
+          type="text"
+          pInputText
+          maxlength="150"
+          formControlName="firstName"
+        />
+      </app-field>
+      <app-field
+        fieldLabel="Last name"
+      >
+        <input
+          class="inputfield w-full"
+          type="text"
+          pInputText
+          maxlength="150"
+          formControlName="lastName"
+        />
+      </app-field>
+
+      <app-field fieldLabel="Rating">
+        <input
+          class="inputfield w-full"
+          type="text"
+          pInputText
+          maxlength="128"
+          formControlName="rating"
+        />
+      </app-field>
+
+      <app-field fieldLabel="Winrate">
+        <input
+          class="inputfield w-full"
+          type="text"
+          pInputText
+          maxlength="128"
+          formControlName="winrate"
+        />
+      </app-field>
+
+      <app-field fieldLabel="Title">
+        <input
+          class="inputfield w-full"
+          type="text"
+          pInputText
+          maxlength="128"
+          formControlName="title"
+        />
+      </app-field>
+    </div>
+  </div>
+</app-centered-dialog>

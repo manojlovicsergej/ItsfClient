@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { API_BASE_VERSIONED_URL } from 'src/app/shared/models/crud-operations';
-import { PlayerTableDto } from '../models/player-table-dto';
+import { PlayerDto } from '../models/player-dto';
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +16,7 @@ export class PlayerHttpService {
     this._baseUrl = `https://localhost:5001/itsf`;
   }
 
-  getAllPlayers(): Observable<PlayerTableDto[]> {
-    return this._http.get<PlayerTableDto[]>(`${this._baseUrl}/get-all-players`);
+  getAllPlayers(): Observable<PlayerDto[]> {
+    return this._http.get<PlayerDto[]>(`${this._baseUrl}/get-all-players`);
   }
 }
