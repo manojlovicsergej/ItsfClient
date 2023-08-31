@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { UtakmiceComponent} from './components/maloprodaja/utakmice.component';
+import { UtakmiceComponent} from './components/utakmice/utakmice.component';
 
 const routes: Routes = [
   {

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UtakmiceRoutingModule } from './utakmice-routing.module';
-import { UtakmiceComponent } from './components/maloprodaja/utakmice.component';
+import { UtakmiceComponent } from './components/utakmice/utakmice.component';
 
 @NgModule({
   declarations: [],
