@@ -1,0 +1,32 @@
+<div class="flex flex-column md:align-items-center md:justify-content-between md:flex-row">
+  <div>
+    <div class="font-medium text-2xl text-900 mb-3">Spisak igrača</div>
+    <div class="text-500 mb-5">Pregled svih igrača koji nastupaju u tekućoj sezoni.</div>
+  </div>
+  <div class="mt-3 md:mt-0">
+    <button pButton pRipple label="Dodaj igrača" (click)="dodajIgracaDialog()" class="p-button-outlined mr-2 custom-button-color"></button>
+  </div>
+</div>
+<p-dataView>
+  <ng-template let-product pTemplate="gridItem">
+    <div class="col-12 sm:col-6 lg:col-12 xl:col-4 p-2">
+      <div class="p-4 border-1 surface-border surface-card border-round">
+        <div class="flex flex-wrap align-items-center justify-content-between gap-2">
+            <span class="flex align-items-center gap-2">
+                <i class="pi pi-tag"></i>
+                <span class="font-semibold">{{ product.category }}</span>
+            </span>
+        </div>
+        <div class="flex flex-column align-items-center gap-3 py-5">
+          <img class="w-9 shadow-2 border-round" [src]="'https://primefaces.org/cdn/primeng/images/demo/product/' + product.image" [alt]="product.name" />
+          <div class="text-2xl font-bold">{{ product.name }}</div>
+
+        </div>
+        <div class="flex align-items-center justify-content-between">
+          <span class="text-2xl font-semibold">{{ '$' + product.price }}</span>
+          <button pButton icon="pi pi-shopping-cart" class="p-button-rounded" [disabled]="product.inventoryStatus === 'OUTOFSTOCK'"></button>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</p-dataView>

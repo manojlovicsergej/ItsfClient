@@ -4,7 +4,7 @@ import { DashboardModule } from './modules/dashboard/dashboard.module';
 import { PublicComponent } from './public.component';
 import { IgraciModule } from './modules/igraci/igraci.module';
 import { RobaModule } from './modules/roba/roba.module';
-import { MaloprodajaModule } from './modules/maloprodaja/maloprodaja.module';
+import { UtakmiceModule } from './modules/maloprodaja/utakmice.module';
 import { KompanijaModule } from './modules/kompanija/kompanija.module';
 
 const routes: Routes = [
@@ -33,11 +33,11 @@ const routes: Routes = [
         },
       },
       {
-        path: 'maloprodaja',
-        loadChildren: () => MaloprodajaModule,
+        path: 'utakmice',
+        loadChildren: () => UtakmiceModule,
         data: {
           breadcrumb: {
-            label: 'Maloprodaja',
+            label: 'Utakmice',
             disable: true,
           },
         },

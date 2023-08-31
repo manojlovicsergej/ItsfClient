@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MaloprodajaComponent } from './maloprodaja.component';
+import { MaloprodajaComponent } from './utakmice.component';
 
-describe('MaloprodajaComponent', () => {
+describe('UtakmiceComponent', () => {
   let component: MaloprodajaComponent;
   let fixture: ComponentFixture<MaloprodajaComponent>;
 
