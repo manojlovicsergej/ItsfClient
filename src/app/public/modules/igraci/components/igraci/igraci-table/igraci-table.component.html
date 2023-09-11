@@ -7,26 +7,25 @@
     <button pButton pRipple label="Dodaj igrača" (click)="dodajIgracaDialog()" class="p-button-outlined mr-2 custom-button-color"></button>
   </div>
 </div>
-<p-dataView>
-  <ng-template let-product pTemplate="gridItem">
-    <div class="col-12 sm:col-6 lg:col-12 xl:col-4 p-2">
-      <div class="p-4 border-1 surface-border surface-card border-round">
-        <div class="flex flex-wrap align-items-center justify-content-between gap-2">
-            <span class="flex align-items-center gap-2">
-                <i class="pi pi-tag"></i>
-                <span class="font-semibold">{{ product.category }}</span>
-            </span>
-        </div>
-        <div class="flex flex-column align-items-center gap-3 py-5">
-          <img class="w-9 shadow-2 border-round" [src]="'https://primefaces.org/cdn/primeng/images/demo/product/' + product.image" [alt]="product.name" />
-          <div class="text-2xl font-bold">{{ product.name }}</div>
 
-        </div>
-        <div class="flex align-items-center justify-content-between">
-          <span class="text-2xl font-semibold">{{ '$' + product.price }}</span>
-          <button pButton icon="pi pi-shopping-cart" class="p-button-rounded" [disabled]="product.inventoryStatus === 'OUTOFSTOCK'"></button>
-        </div>
+<ul class="list-none p-0 m-0">
+  <li class="flex flex-column sm:flex-row sm:justify-content-between sm:align-items-center mb-5" *ngFor="let player of players">
+      <div class="flex align-items-center">
+          <span class="block mr-3 surface-200 border-radius: 10px inline-flex justify-content-center align-items-center" style="width:58px; height: 58px; border-radius: 10px">
+            <img src="assets/images/player.png" style="width: 30px; height: 30px;" />
+          </span>
+          <div>
+              <div class="text-900 font-medium text-xl mb-2">{{player.firstName}} {{player.lastName}}</div>
+              <div class="flex align-items-center">
+                  <i class="pi pi-apple text-600 mr-2"></i>
+                  <span class="text-600">{{player.position === 0 ? 'Napadač' : 'Odbrana'}}</span>
+                  <span class="inline-flex p-1 bg-green-100 text-green-600 font-medium text-sm border-round ml-3">{{player.title}}</span>
+              </div>
+          </div>
       </div>
-    </div>
-  </ng-template>
-</p-dataView>
+      <div class="sm:text-right mt-3 md:mt-0">
+        <span class="izmeni-button-color text-sm py-2 px-3" style="border-radius: 10px; cursor: pointer;">Izmeni</span>
+        <div class="text-sm text-600 mt-3">Winrate : {{player.winrate}}</div>
+      </div>
+  </li>
+</ul>

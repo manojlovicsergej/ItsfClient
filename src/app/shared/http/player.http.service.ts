@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
-import { Inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { API_BASE_VERSIONED_URL } from 'src/app/shared/models/crud-operations';
 import { PlayerDto } from '../models/player-dto';
+import {BASE_URL} from "../services/useful-things.service";
 
 @Injectable({
   providedIn: 'root',
@@ -13,10 +13,16 @@ export class PlayerHttpService {
   constructor(
     protected _http: HttpClient
   ) {
-    this._baseUrl = `https://localhost:5001/itsf`;
+    this._baseUrl = BASE_URL;
   }
 
   getAllPlayers(): Observable<PlayerDto[]> {
     return this._http.get<PlayerDto[]>(`${this._baseUrl}/get-all-players`);
+  }
+
+  addPlayer(request: PlayerDto): Observable<string> {
+    return this._http.post(`${this._baseUrl}/add-player`, request, {
+      responseType: 'text',
+    });
   }
 }

@@ -9,11 +9,16 @@ import { ChipsModule } from 'primeng/chips';
 import { InputTextModule } from 'primeng/inputtext';
 import { ChipModule } from 'primeng/chip';
 import { MessageService } from 'primeng/api';
+import { DropdownModule } from 'primeng/dropdown';
+import { CalendarModule } from 'primeng/calendar';
+import { RatingModule } from 'primeng/rating';
+import { RatingComponent } from './components/ui/rating/rating.component';
 
 @NgModule({
   declarations: [
     CenteredDialogComponent,
-    FieldComponent
+    FieldComponent,
+    RatingComponent,
   ],
   imports: [
     CommonModule,
@@ -21,17 +26,24 @@ import { MessageService } from 'primeng/api';
     InputTextModule,
     ChipModule,
     ButtonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    DropdownModule,
+    CalendarModule,
+    RatingModule
   ],
   exports: [
     ReactiveFormsModule,
     ButtonModule,
+    DropdownModule,
     CommonModule,
+    CalendarModule,
     ChipsModule,
+    RatingModule,
     InputTextModule,
     ChipModule,
     CenteredDialogComponent,
-    FieldComponent
+    FieldComponent,
+    RatingComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers : [DialogService,MessageService]

@@ -1,6 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {DialogService} from "primeng/dynamicdialog";
 import {DodajIgracaDijalogComponent} from "../../ui/dodaj-igraca-dijalog/dodaj-igraca-dijalog.component";
+import { PlayerHttpService } from 'src/app/shared/http/player.http.service';
+import { Subscription } from 'rxjs';
+import { PlayerDto } from 'src/app/shared/models/player-dto';
 
 @Component({
   selector: 'app-igraci-table',
@@ -8,9 +11,30 @@ import {DodajIgracaDijalogComponent} from "../../ui/dodaj-igraca-dijalog/dodaj-i
   styleUrls: ['./igraci-table.component.scss']
 })
 export class IgraciTableComponent implements OnInit{
-  constructor(private _dialogService: DialogService) {
+  /** Subs */
+  _subs: Subscription;
+
+  /** Props */
+  players : PlayerDto[] = [];
+
+  constructor(
+    private _playerHttp: PlayerHttpService,
+    private _dialogService : DialogService) 
+  {
+    this._subs = new Subscription();
   }
+
   ngOnInit(): void {
+    this._load();
+  }
+
+  private _load() {
+    this._subs.add(
+      this._playerHttp.getAllPlayers().subscribe((res) => {
+        this.players = res;
+        console.log(this.players);
+      })
+    );
   }
 
   dodajIgracaDialog(){
@@ -21,5 +45,13 @@ export class IgraciTableComponent implements OnInit{
         title : 'Dodavanje novog igrača'
       }
     });
+
+    ref.onClose.subscribe(()=>{
+      this._load();
+    })
+  }
+
+  ngOnDestroy(): void {
+    this._subs.unsubscribe();
   }
 }

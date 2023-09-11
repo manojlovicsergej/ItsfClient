@@ -7,11 +7,13 @@ import { DataViewModule } from 'primeng/dataview';
 import {SharedModule} from "../../../shared/shared.module";
 import { DodajIgracaDijalogComponent } from './components/ui/dodaj-igraca-dijalog/dodaj-igraca-dijalog.component';
 import {ReactiveFormsModule} from "@angular/forms";
+import { PositionDropdownComponent } from './components/ui/position-dropdown/position-dropdown.component';
 @NgModule({
   declarations: [
     IgraciComponent,
     IgraciTableComponent,
-    DodajIgracaDijalogComponent
+    DodajIgracaDijalogComponent,
+    PositionDropdownComponent
   ],
   imports: [IgraciRoutingModule, DataViewModule, SharedModule],
   providers: [],

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {BehaviorSubject} from "rxjs";
 import {PlayerDto} from "../../../../shared/models/player-dto";
+import {Position} from "../../../../shared/models/position-type";
 
 @Injectable({
   providedIn: 'root'
@@ -35,7 +36,7 @@ export class IgracFormService {
       dateofBirth: new FormControl(model?.dateofBirth, {
         validators : [Validators.nullValidator]
       }),
-      position: new FormControl(model?.position, {
+      position: new FormControl(model?.position ?? Position.ATTACKER, {
         validators : [Validators.required]
       }),
       rating: new FormControl(model?.firstName, {
