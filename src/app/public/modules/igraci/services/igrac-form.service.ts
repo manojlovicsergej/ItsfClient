@@ -34,7 +34,7 @@ export class IgracFormService {
         validators : [Validators.required]
       }),
       dateofBirth: new FormControl(model?.dateofBirth, {
-        validators : [Validators.nullValidator]
+        validators : [Validators.required]
       }),
       position: new FormControl(model?.position ?? Position.ATTACKER, {
         validators : [Validators.required]
@@ -43,10 +43,10 @@ export class IgracFormService {
         validators : [Validators.required]
       }),
       winrate: new FormControl(model?.winrate, {
-        validators : [Validators.nullValidator]
+        validators : [Validators.required]
       }),
       title: new FormControl(model?.title, {
-        validators : [Validators.nullValidator]
+        validators : [Validators.required]
       }),
     });
   }

@@ -1,18 +1,18 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {DynamicDialogConfig, DynamicDialogRef} from "primeng/dynamicdialog";
-import {Subscription} from "rxjs";
-import {PlayerDto} from "../../../../../../shared/models/player-dto";
-import {IgracFormService} from "../../../services/igrac-form.service";
-import {FormHelperService} from "../../../../../../shared/services/form-helper.service";
-import {AlertService} from "../../../../../../shared/services/alert.service";
-import {FormGroup} from "@angular/forms";
-import {asFormControl} from "../../../../../../shared/services/useful-things.service";
-import {PlayerHttpService} from "../../../../../../shared/http/player.http.service";
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { Subscription } from 'rxjs';
+import { PlayerDto } from '../../../../../../shared/models/player-dto';
+import { IgracFormService } from '../../../services/igrac-form.service';
+import { FormHelperService } from '../../../../../../shared/services/form-helper.service';
+import { AlertService } from '../../../../../../shared/services/alert.service';
+import { FormGroup } from '@angular/forms';
+import { asFormControl } from '../../../../../../shared/services/useful-things.service';
+import { PlayerHttpService } from '../../../../../../shared/http/player.http.service';
 
 @Component({
   selector: 'app-dodaj-igraca-dijalog',
   templateUrl: './dodaj-igraca-dijalog.component.html',
-  styleUrls: ['./dodaj-igraca-dijalog.component.scss']
+  styleUrls: ['./dodaj-igraca-dijalog.component.scss'],
 })
 export class DodajIgracaDijalogComponent implements OnInit, OnDestroy {
   // Subs
@@ -20,30 +20,37 @@ export class DodajIgracaDijalogComponent implements OnInit, OnDestroy {
 
   // props
   dialogTitle: string = '';
-  form: FormGroup| null;
+  form: FormGroup | null;
   model: PlayerDto | null;
+  isEdit: boolean = false;
 
   constructor(
     private _dialogRef: DynamicDialogRef,
     private _dialogConfig: DynamicDialogConfig,
     private _fs: IgracFormService,
     private _formHelper: FormHelperService,
-    private _alertService : AlertService,
-    private _client : PlayerHttpService)
-  {
+    private _alertService: AlertService,
+    private _client: PlayerHttpService
+  ) {
     this._subs = new Subscription();
     this.model = null;
     this.form = null;
   }
 
   ngOnInit(): void {
-    this.dialogTitle = this._dialogConfig.data.title;
-
     this._subs.add(
       this._fs.getForm.subscribe((res) => {
         this.form = res;
       })
     );
+
+    this.dialogTitle = this._dialogConfig.data.title;
+    this.model = this._dialogConfig.data.player;
+
+    if (this.model != null) {
+      this.patchFormByModel(this.model);
+      this.isEdit = true;
+    }
   }
 
   handleSave() {
@@ -55,16 +62,26 @@ export class DodajIgracaDijalogComponent implements OnInit, OnDestroy {
       //this._dialogRef.close();
       return;
     }
-    console.log(this.form.value);
-    this._subs.add(
-      this._client.addPlayer(this.form.value as PlayerDto).subscribe((res)=>{
-        console.log(res);
-        this._alertService.addWarnMsg(
-          'Morate popuniti obavezna polja (označena crvenom bojom)!'
-        );
-        this._dialogRef.close();
-      })
-    )
+
+    if (this.isEdit) {
+      this._subs.add(
+        this._client
+          .updatePlayer(this.form.value as PlayerDto)
+          .subscribe((res) => {
+            this._alertService.addSuccessMsg('Uspešno ste izmenili igrača!');
+            this._dialogRef.close();
+          })
+      );
+    } else {
+      this._subs.add(
+        this._client
+          .addPlayer(this.form.value as PlayerDto)
+          .subscribe((res) => {
+            this._alertService.addSuccessMsg('Uspešno ste dodali igrača!');
+            this._dialogRef.close();
+          })
+      );
+    }
   }
 
   handleCancel() {
@@ -73,6 +90,12 @@ export class DodajIgracaDijalogComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this._subs.unsubscribe();
+  }
+
+  private patchFormByModel(model: PlayerDto) {
+    if (this.form != null) {
+      this.form.patchValue(model);
+    }
   }
 
   protected readonly asFormControl = asFormControl;

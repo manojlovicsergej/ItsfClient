@@ -5,9 +5,7 @@
 >
   <div [formGroup]="form" *ngIf="form">
     <div class="w-full">
-      <app-field
-        fieldLabel="Ime"
-      >
+      <app-field fieldLabel="Ime">
         <input
           class="inputfield w-full"
           type="text"
@@ -16,9 +14,7 @@
           [formControl]="asFormControl(form.controls['firstName'])"
         />
       </app-field>
-      <app-field
-        fieldLabel="Prezime"
-      >
+      <app-field fieldLabel="Prezime">
         <input
           class="inputfield w-full"
           type="text"
@@ -27,13 +23,12 @@
           [formControl]="asFormControl(form.controls['lastName'])"
         />
       </app-field>
-      <app-field
-        fieldLabel="Datum rodjenja"
-      >
-        <p-calendar
+      <app-field fieldLabel="Datum rodjenja">
+        <app-calendar
           class="inputfield w-full"
-          [formControl]="asFormControl(form.controls['dateofBirth'])"
-        ></p-calendar>
+          [formCtrl]="asFormControl(form.controls['dateofBirth'])"
+        >
+        </app-calendar>
       </app-field>
       <app-field fieldLabel="Rejting">
         <input

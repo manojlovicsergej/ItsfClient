@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { UtakmiceRoutingModule } from './utakmice-routing.module';
 import { UtakmiceComponent } from './components/utakmice/utakmice.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
-  declarations: [],
-  imports: [CommonModule, UtakmiceRoutingModule],
+  declarations: [UtakmiceComponent],
+  imports: [UtakmiceRoutingModule, SharedModule],
   providers: [],
   bootstrap: [UtakmiceComponent],
 })
