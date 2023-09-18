@@ -56,10 +56,10 @@ export class DodajIgracaDijalogComponent implements OnInit, OnDestroy {
   handleSave() {
     if (this.form === null || !this.form.valid) {
       this._formHelper.invalidateForm(this.form!);
-      // this._alertService.addWarnMsg(
-      //   'Morate popuniti obavezna polja (označena crvenom bojom)!'
-      // );
-      //this._dialogRef.close();
+      this._alertService.addWarnMsg(
+        'Morate popuniti sva obavezna polja!'
+      );
+      this._dialogRef.close();
       return;
     }
 

@@ -8,6 +8,9 @@ import { AlertService } from 'src/app/shared/services/alert.service';
 import { asFormControl } from 'src/app/shared/services/useful-things.service';
 import { UtakmicaFormService } from '../../services/utakmica-form.service';
 import { Side } from 'src/app/shared/models/side-type';
+import { FormHelperService } from 'src/app/shared/services/form-helper.service';
+import { PlayerGamesDto } from 'src/app/shared/models/player-games-dto';
+import { GameHttpService } from 'src/app/shared/http/game.http.service';
 
 @Component({
   selector: 'app-utakmice',
@@ -25,11 +28,15 @@ export class UtakmiceComponent implements OnInit, OnDestroy {
   tempPlayers: PlayerDto[] = [];
   hostPlayers: PlayerDto[] = [];
   guestPlayers: PlayerDto[] = [];
+  games: GameDto[] = [];
+  currentGames: GameDto[] = [];
 
   constructor(
     private _alertService: AlertService,
     private _playerHttp: PlayerHttpService,
-    private _fs: UtakmicaFormService
+    private _fs: UtakmicaFormService,
+    private _formHelper: FormHelperService,
+    private _gameHttp: GameHttpService
   ) {
     this._subs = new Subscription();
     this.model = null;
@@ -50,6 +57,18 @@ export class UtakmiceComponent implements OnInit, OnDestroy {
       this._playerHttp.getAllPlayers().subscribe((res) => {
         this.players = res;
         this.tempPlayers = this.players;
+      })
+    );
+
+    this._subs.add(
+      this._gameHttp.getAllGames().subscribe((res) => {
+        this.games = res;
+      })
+    );
+
+    this._subs.add(
+      this._gameHttp.getCurrentGames().subscribe((res) => {
+        this.currentGames = res;
       })
     );
   }
@@ -83,6 +102,72 @@ export class UtakmiceComponent implements OnInit, OnDestroy {
 
   izbaciIgracaIzBrzePretrage(id: number) {
     this.tempPlayers = this.tempPlayers.filter((player) => player.id !== id);
+  }
+
+  obrisiUtakmicu(id?: number) {
+    if (!id) {
+      this._alertService.addFailedMsg(
+        'Ne moguće obrisati jer utakmica ne postoji!'
+      );
+    }
+
+    this._subs.add(
+      this._gameHttp.deletePlayer(id!).subscribe((res) => {
+        this._alertService.addSuccessMsg('Uspešno ste obrisali utakmicu!');
+        this._load();
+      })
+    );
+  }
+
+  kreirajUtakmicu() {
+    if (
+      this.form === null ||
+      !this.form.valid ||
+      this.guestPlayers.length < 2 ||
+      this.hostPlayers.length < 2
+    ) {
+      this._formHelper.invalidateForm(this.form!);
+      this._alertService.addWarnMsg('Morate popuniti sva obavezna polja!');
+      return;
+    }
+
+    this.dodajIgraceUForm();
+
+    this._subs.add(
+      this._gameHttp.addGame(this.form.value as GameDto).subscribe(
+        (res) => {
+          this._alertService.addSuccessMsg('Uspešno ste dodali utakmicu!');
+          this._load();
+          this.form?.reset();
+          this._resetPlayers();
+        },
+        (error) => {
+          this._alertService.addFailedMsg('Došlo je do greške!');
+        }
+      )
+    );
+  }
+
+  dodajIgraceUForm() {
+    this.guestPlayers.forEach((x: PlayerDto) => {
+      const gamePlayer = { playerId: x.id, side: Side.GUEST } as PlayerGamesDto;
+      (this.form?.controls['gamePlayers'] as FormArray).push(
+        this._fs.GetGamePlayersFormGroup(gamePlayer)
+      );
+    });
+
+    this.hostPlayers.forEach((x: PlayerDto) => {
+      const gamePlayer = { playerId: x.id, side: Side.HOST } as PlayerGamesDto;
+      (this.form?.controls['gamePlayers'] as FormArray).push(
+        this._fs.GetGamePlayersFormGroup(gamePlayer)
+      );
+    });
+  }
+
+  private _resetPlayers() {
+    this.guestPlayers = [];
+    this.hostPlayers = [];
+    this.tempPlayers = this.players;
   }
 
   ngOnDestroy(): void {

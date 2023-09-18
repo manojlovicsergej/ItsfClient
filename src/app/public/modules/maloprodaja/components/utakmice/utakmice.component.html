@@ -4,6 +4,15 @@
       <div class="surface-card shadow-2 border-round p-4" style="height: 640px">
         <div class="flex justify-content-between align-items-center mb-5">
           <span class="text-xl text-900 font-medium">Kreiraj utakmicu</span>
+          <div>
+            <button
+              pButton
+              class="kreiraj-utakmicu-button p-button-rounded"
+              (click)="kreirajUtakmicu()"
+            >
+              Kreiraj
+            </button>
+          </div>
         </div>
         <div [formGroup]="form" *ngIf="form">
           <app-field fieldLabel="Naziv utakmice">
@@ -217,6 +226,17 @@
     <div class="flex justify-content-between align-items-center mb-5">
       <span class="text-xl text-900 font-medium">Utakmice u toku</span>
     </div>
+    <div
+      class="bg-blue-700 text-white p-3 flex justify-content-between align-items-center flex-wrap shadow-2"
+      style="border-radius: 8px"
+      *ngIf="currentGames.length === 0"
+    >
+      <div class="align-items-center flex">
+        <span class="line-height-3 hidden lg:block"
+          >Nijedna utakmica se ne igra trenutno!</span
+        >
+      </div>
+    </div>
   </div>
 </div>
 
@@ -225,5 +245,63 @@
     <div class="flex justify-content-between align-items-center mb-5">
       <span class="text-xl text-900 font-medium">Sve utakmice</span>
     </div>
+    <div
+      class="bg-blue-700 text-white p-3 flex justify-content-between align-items-center flex-wrap shadow-2"
+      style="border-radius: 8px"
+      *ngIf="games.length === 0"
+    >
+      <div class="align-items-center flex">
+        <span class="line-height-3 hidden lg:block"
+          >Nema nijedne utakmice!</span
+        >
+      </div>
+    </div>
+    <ul class="list-none p-0 m-0" *ngIf="games.length > 0">
+      <li
+        class="flex flex-column sm:flex-row sm:justify-content-between sm:align-items-center mb-5"
+        *ngFor="let game of games"
+      >
+        <div class="flex align-items-center">
+          <span
+            class="block mr-3 surface-200 border-radius: 10px inline-flex justify-content-center align-items-center"
+            style="width: 58px; height: 58px; border-radius: 10px"
+          >
+            <img
+              src="assets/images/match.png"
+              style="width: 30px; height: 30px"
+            />
+          </span>
+          <div>
+            <div class="text-900 font-medium text-xl mb-2">
+              Domaćin : {{ game.hostName }}
+            </div>
+            <div class="text-900 font-medium text-xl mb-2">
+              Gost : {{ game.guestName }}
+            </div>
+          </div>
+          <div>
+            <div class="naziv-utakmice-label font-medium text-xl mb-2">
+              Naziv : {{ game.gameName }}
+            </div>
+          </div>
+          <span
+            class="obrisi-utakmicu-button-color text-sm py-1 px-3 ml-5 mb-1"
+            style="border-radius: 10px; cursor: pointer"
+            (click)="obrisiUtakmicu(game.id)"
+            >Obriši utakmicu</span
+          >
+        </div>
+        <div class="sm:text-right mt-3 md:mt-0">
+          <div>
+            <div class="text-900 font-medium text-xl mb-2">
+              Rezultat : {{ game.hostResult }}
+            </div>
+            <div class="text-900 font-medium text-xl mb-2">
+              Winrate : {{ game.guestResult }}
+            </div>
+          </div>
+        </div>
+      </li>
+    </ul>
   </div>
 </div>
