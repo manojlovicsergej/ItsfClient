@@ -21,14 +21,14 @@ export class UtakmicaFormService {
 
   get getForm() {
     if (this.form$.getValue() === null) {
-      this.setForm = this.GetIgracGroup();
+      this.setForm = this.GetUtakmicaGroup();
     }
 
     return this.form$.asObservable();
   }
   constructor(private _fb: FormBuilder) {}
 
-  public GetIgracGroup(model?: GameDto): FormGroup {
+  public GetUtakmicaGroup(model?: GameDto): FormGroup {
     return this._fb.group({
       id: new FormControl(model?.id),
       gameName: new FormControl(model?.gameName, {

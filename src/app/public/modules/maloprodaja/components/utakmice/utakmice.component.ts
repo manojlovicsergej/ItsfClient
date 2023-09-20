@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormArray, FormGroup } from '@angular/forms';
+import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { PlayerHttpService } from 'src/app/shared/http/player.http.service';
 import { GameDto } from 'src/app/shared/models/game-dto';
@@ -11,6 +11,8 @@ import { Side } from 'src/app/shared/models/side-type';
 import { FormHelperService } from 'src/app/shared/services/form-helper.service';
 import { PlayerGamesDto } from 'src/app/shared/models/player-games-dto';
 import { GameHttpService } from 'src/app/shared/http/game.http.service';
+import { DialogService } from 'primeng/dynamicdialog';
+import { ZavrsiUtakmicuDialogComponent } from '../dialogs/zavrsi-utakmicu-dialog/zavrsi-utakmicu-dialog.component';
 
 @Component({
   selector: 'app-utakmice',
@@ -36,7 +38,8 @@ export class UtakmiceComponent implements OnInit, OnDestroy {
     private _playerHttp: PlayerHttpService,
     private _fs: UtakmicaFormService,
     private _formHelper: FormHelperService,
-    private _gameHttp: GameHttpService
+    private _gameHttp: GameHttpService,
+    private _dialogService: DialogService
   ) {
     this._subs = new Subscription();
     this.model = null;
@@ -112,7 +115,7 @@ export class UtakmiceComponent implements OnInit, OnDestroy {
     }
 
     this._subs.add(
-      this._gameHttp.deletePlayer(id!).subscribe((res) => {
+      this._gameHttp.deleteGame(id!).subscribe((res) => {
         this._alertService.addSuccessMsg('Uspešno ste obrisali utakmicu!');
         this._load();
       })
@@ -161,6 +164,23 @@ export class UtakmiceComponent implements OnInit, OnDestroy {
       (this.form?.controls['gamePlayers'] as FormArray).push(
         this._fs.GetGamePlayersFormGroup(gamePlayer)
       );
+    });
+  }
+
+  updateUtakmicu(game: GameDto) {
+    const ref = this._dialogService.open(ZavrsiUtakmicuDialogComponent, {
+      showHeader: false,
+      width: '500px',
+      data: {
+        title: 'Dodaj rezultat utakmice',
+        gameId: game.id,
+        hostResult: game.hostResult,
+        guestResult: game.guestResult,
+      },
+    });
+
+    ref.onClose.subscribe(() => {
+      this._load();
     });
   }
 

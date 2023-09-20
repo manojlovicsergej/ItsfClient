@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { BASE_URL } from '../services/useful-things.service';
 import { GameDto } from '../models/game-dto';
 import { Observable } from 'rxjs';
+import { ZavrsiUtakmicuDto } from '../models/zavrsi-utakmicu-dto';
 
 @Injectable({
   providedIn: 'root',
@@ -20,6 +21,12 @@ export class GameHttpService {
     });
   }
 
+  updateGame(request: ZavrsiUtakmicuDto): Observable<string> {
+    return this._http.put(`${this._baseUrl}/update-game`, request, {
+      responseType: 'text',
+    });
+  }
+
   getAllGames(): Observable<GameDto[]> {
     return this._http.get<GameDto[]>(`${this._baseUrl}/get-all-games`);
   }
@@ -28,7 +35,7 @@ export class GameHttpService {
     return this._http.get<GameDto[]>(`${this._baseUrl}/get-current-games`);
   }
 
-  deletePlayer(gameId: number): Observable<string> {
+  deleteGame(gameId: number): Observable<string> {
     return this._http.delete<string>(
       `${this._baseUrl}/delete-game?gameId=${gameId}`
     );

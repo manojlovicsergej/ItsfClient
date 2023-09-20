@@ -3,9 +3,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { DashboardModule } from './modules/dashboard/dashboard.module';
 import { PublicComponent } from './public.component';
 import { IgraciModule } from './modules/igraci/igraci.module';
-import { RobaModule } from './modules/roba/roba.module';
+import { TurnirModule } from './modules/roba/turnir.module';
 import { UtakmiceModule } from './modules/maloprodaja/utakmice.module';
-import { KompanijaModule } from './modules/kompanija/kompanija.module';
+import { DashboardResolver } from './modules/dashboard/resolvers/dashboard-resolver.service';
 
 const routes: Routes = [
   {
@@ -15,6 +15,9 @@ const routes: Routes = [
       {
         path: 'dashboard',
         loadChildren: () => DashboardModule,
+        resolve: {
+          dashboardData : DashboardResolver
+        },
         data: {
           breadcrumb: {
             label: 'Dashboard',
@@ -43,27 +46,18 @@ const routes: Routes = [
         },
       },
       {
-        path: 'roba',
-        loadChildren: () => RobaModule,
+        path: 'turnir',
+        loadChildren: () => TurnirModule,
         data: {
           breadcrumb: {
-            label: 'Roba',
-            disable: true,
-          },
-        },
-      },
-      {
-        path: 'kompanija',
-        loadChildren: () => KompanijaModule,
-        data: {
-          breadcrumb: {
-            label: 'Kompanija',
+            label: 'Turnir',
             disable: true,
           },
         },
       },
     ],
   },
+  
 ];
 
 @NgModule({
