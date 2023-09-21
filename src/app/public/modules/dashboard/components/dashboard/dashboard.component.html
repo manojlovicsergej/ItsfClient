@@ -66,13 +66,13 @@
           >
         </div>
         <div class="line-height-3 text-900 mb-3">
-          {{ dashboardData?.igrac?.firstName }} 
-          {{ dashboardData?.igrac?.lastName }}
+          {{ dashboardData.igrac?.firstName }} 
+          {{ dashboardData.igrac?.lastName }}
         </div>
         <div class="text-500 flex align-items-center">
-          <span class="mr-3">Rating : {{dashboardData?.igrac?.rating}}</span>
-          <span class="mr-3">Winrate : {{dashboardData?.igrac?.winrate}}%</span>
-          <span class="mr-3">Title : {{dashboardData?.igrac?.title}}</span>
+          <span class="mr-3">Rating : {{dashboardData.igrac?.rating}}</span>
+          <span class="mr-3">Winrate : {{dashboardData.igrac?.winrate}}%</span>
+          <span class="mr-3">Title : {{dashboardData.igrac?.title}}</span>
         </div>
       </div>
     </div>
@@ -95,12 +95,12 @@
           >
         </div>
         <div class="line-height-3 text-900 mb-3">
-          {{ dashboardData?.utakmica?.gameName }} 
+          {{ dashboardData.utakmica?.gameName }} 
         </div>
         <div class="text-500 flex align-items-center">
-          <span class="mr-3">Domaćin : {{dashboardData?.utakmica?.hostName}}</span>
-          <span class="mr-3">Gost : {{dashboardData?.utakmica?.guestName}}</span>
-          <span>Rezultat : {{dashboardData?.utakmica?.hostResult}}:{{dashboardData?.utakmica?.guestResult}}</span>
+          <span class="mr-3">Domaćin : {{dashboardData.utakmica?.hostName}}</span>
+          <span class="mr-3">Gost : {{dashboardData.utakmica?.guestName}}</span>
+          <span>Rezultat : {{dashboardData.utakmica?.hostResult}}:{{dashboardData.utakmica?.guestResult}}</span>
         </div>
       </div>
     </div>
@@ -124,12 +124,12 @@
           >
         </div>
         <div class="line-height-3 text-700 mb-3">
-          {{ dashboardData?.turnir?.name }} 
+          {{ dashboardData.turnir?.name }} 
         </div>
         <div class="text-500 flex align-items-center">
-          <span class="mr-3">Format : {{ dashboardData?.turnir?.format }}</span>
-          <span class="mr-3">Place : {{ dashboardData?.turnir?.place }}</span>
-          <span>Prize : {{ dashboardData?.turnir?.prize }}</span>
+          <span class="mr-3">Format : {{ dashboardData.turnir?.format }}</span>
+          <span class="mr-3">Place : {{ dashboardData.turnir?.place }}</span>
+          <span>Prize : {{ dashboardData.turnir?.prize }}</span>
         </div>
       </div>
     </div>
