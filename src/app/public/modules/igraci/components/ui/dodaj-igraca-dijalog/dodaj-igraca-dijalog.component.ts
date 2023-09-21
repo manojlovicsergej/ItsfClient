@@ -56,9 +56,7 @@ export class DodajIgracaDijalogComponent implements OnInit, OnDestroy {
   handleSave() {
     if (this.form === null || !this.form.valid) {
       this._formHelper.invalidateForm(this.form!);
-      this._alertService.addWarnMsg(
-        'Morate popuniti sva obavezna polja!'
-      );
+      this._alertService.addWarnMsg('Morate popuniti sva obavezna polja!');
       this._dialogRef.close();
       return;
     }
@@ -70,6 +68,7 @@ export class DodajIgracaDijalogComponent implements OnInit, OnDestroy {
           .subscribe((res) => {
             this._alertService.addSuccessMsg('Uspešno ste izmenili igrača!');
             this._dialogRef.close();
+            this.form?.reset();
           })
       );
     } else {
@@ -79,6 +78,7 @@ export class DodajIgracaDijalogComponent implements OnInit, OnDestroy {
           .subscribe((res) => {
             this._alertService.addSuccessMsg('Uspešno ste dodali igrača!');
             this._dialogRef.close();
+            this.form?.reset();
           })
       );
     }

@@ -91,6 +91,7 @@ export class TurnirComponent implements OnInit, OnDestroy {
           this.utakmiceSelectVisible = false;
           this.chosenGames = [];
           this.tempGames = this.games;
+          this.form?.reset();
         })
     );
   }
@@ -127,7 +128,7 @@ export class TurnirComponent implements OnInit, OnDestroy {
         this._alertService.addSuccessMsg('Uspešno ste obrisali turnir!');
         this._load();
       })
-    )
+    );
   }
 
   ngOnDestroy(): void {
